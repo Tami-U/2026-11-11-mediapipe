@@ -75,6 +75,10 @@ button[aria-pressed="true"]{background:rgba(143,240,194,.2);border-color:var(--g
   text-shadow:0 0 34px rgba(143,240,194,.2);
 }
 .brand p{margin:3px 0 0;font-size:11.5px;color:var(--ink-dim);letter-spacing:.14em;text-transform:uppercase}
+#gestureHint{align-self:center;max-width:390px;margin:0;padding:8px 14px;
+  border:1px solid var(--glass-hi);border-radius:999px;background:var(--glass);
+  color:#d8f5e8;font-size:12px;line-height:1.4;text-align:center}
+#gestureHint b{color:var(--mint);font-weight:600}
 
 #pill{pointer-events:auto;display:flex;align-items:center;gap:9px;padding:8px 14px;
   border-radius:999px;font-size:12.5px;color:var(--ink-dim)}
@@ -126,7 +130,7 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border:0;border-radiu
 
 /* ---------- 손 추적 미리보기 ---------- */
 #handcard{position:fixed;left:clamp(16px,3vw,26px);bottom:max(20px,env(safe-area-inset-bottom));
-  z-index:6;padding:10px;width:206px;
+  z-index:6;padding:12px;width:270px;
   transition:opacity .4s var(--ease),transform .4s var(--ease)}
 #handcard[hidden]{display:none}
 .handhead{display:flex;justify-content:space-between;align-items:center;gap:8px;
@@ -188,6 +192,8 @@ body.dropping::after{content:"";position:fixed;inset:10px;z-index:30;pointer-eve
   background:rgba(143,240,194,.05)}
 
 @media (max-width:720px){
+  #top{flex-wrap:wrap;align-items:center;row-gap:8px}
+  #gestureHint{order:3;flex:0 0 100%;max-width:none;text-align:left;font-size:11px}
   #facecard{width:auto;flex-direction:row;align-items:center;left:clamp(12px,3vw,26px);right:clamp(12px,3vw,26px);
     bottom:auto;top:calc(72px + env(safe-area-inset-top));padding:10px;gap:12px}
   .ring{width:62px;height:76px}
@@ -202,11 +208,11 @@ body.dropping::after{content:"";position:fixed;inset:10px;z-index:30;pointer-eve
 }
 @media (max-width:1240px){
   #facecard{bottom:auto;top:86px}
-  #handcard{bottom:auto;top:86px;width:178px}
+  #handcard{bottom:auto;top:86px}
 }
 @media (max-width:720px){
-  #facecard{top:calc(72px + env(safe-area-inset-top))}
-  #handcard{top:calc(174px + env(safe-area-inset-top));width:160px;left:12px}
+  #facecard{top:calc(112px + env(safe-area-inset-top))}
+  #handcard{top:calc(214px + env(safe-area-inset-top));width:min(260px,calc(100vw - 24px));left:12px}
   .handhead{font-size:10px;margin-bottom:6px}
   .handhead small{font-size:8px}
   #handtracking{font-size:10px;margin-top:6px}
@@ -228,6 +234,7 @@ body.dropping::after{content:"";position:fixed;inset:10px;z-index:30;pointer-eve
     <h1>요정의 숲</h1>
     <p>v2 &middot; move to glow</p>
   </div>
+  <p id="gestureHint"><b>검지로 이동</b> · 엄지와 검지를 집어 <b>반짝이 뿌리기</b></p>
   <div id="pill" class="panel" data-state="idle" role="status" aria-live="polite">
     <i id="dot"></i><span id="pilltext">카메라 대기 중</span>
   </div>
@@ -246,7 +253,7 @@ body.dropping::after{content:"";position:fixed;inset:10px;z-index:30;pointer-eve
 
 <section id="handcard" class="panel" aria-label="손 관절 추적 미리보기" hidden>
   <div class="handhead"><span>손 관절 추적</span><small aria-hidden="true">21 POINTS</small></div>
-  <canvas id="handpreview" width="192" height="108" aria-label="카메라에 감지된 손 관절 21개"></canvas>
+  <canvas id="handpreview" width="256" height="144" aria-label="카메라에 감지된 손 관절 21개"></canvas>
   <p id="handtracking" role="status" aria-live="polite">손 추적 준비 중…</p>
 </section>
 
